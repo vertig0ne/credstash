@@ -501,7 +501,7 @@ def putAllSecretsAction(args, region, endpoint_url, kms_region, **session_params
 @clean_fail
 def getSecretAction(args, region, endpoint_url, kms_region,  **session_params):
     try:
-        sys.stderr.write(endpoint_url)
+        sys.stderr.write(str(endpoint_url))
         if WILDCARD_CHAR in args.credential:
             names = expand_wildcard(args.credential,
                                     [x["name"]
