@@ -1122,6 +1122,7 @@ def main():
     try:
         region = args.region
         endpoint_url = args.endpoint_url
+        print(endpoint_url)
         session = get_session(**session_params)
         session.resource('dynamodb', region_name=region, endpoint_url=endpoint_url)
     except botocore.exceptions.NoRegionError:
