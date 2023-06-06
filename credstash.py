@@ -438,7 +438,7 @@ def getAllAction(args, region, endpoint_url, kms_region, **session_params):
 
 
 @clean_fail
-def putSecretAction(args, region, endpoint_url=endpoint_url, kms_region, **session_params):
+def putSecretAction(args, region, endpoint_url, kms_region, **session_params):
     if args.autoversion:
         latestVersion = getHighestVersion(args.credential,
                                           region,
