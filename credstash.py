@@ -501,7 +501,6 @@ def putAllSecretsAction(args, region, endpoint_url, kms_region, **session_params
 @clean_fail
 def getSecretAction(args, region, endpoint_url, kms_region,  **session_params):
     try:
-        sys.stderr.write(str(endpoint_url))
         if WILDCARD_CHAR in args.credential:
             names = expand_wildcard(args.credential,
                                     [x["name"]
@@ -1122,7 +1121,6 @@ def main():
     try:
         region = args.region
         endpoint_url = args.endpoint_url
-        print(endpoint_url)
         session = get_session(**session_params)
         session.resource('dynamodb', region_name=region, endpoint_url=endpoint_url)
     except botocore.exceptions.NoRegionError:
