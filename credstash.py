@@ -438,7 +438,7 @@ def getAllAction(args, region, endpoint_url, kms_region, **session_params):
 
 
 @clean_fail
-def putSecretAction(args, region, endpoint_url, kms_region, **session_params):
+def putSecretAction(args, region, endpoint_url=endpoint_url, kms_region, **session_params):
     if args.autoversion:
         latestVersion = getHighestVersion(args.credential,
                                           region,
@@ -1112,7 +1112,7 @@ def main():
     # test for region
     try:
         region = args.region
-        endpoint_url = args.endpoint-url
+        endpoint_url = args.endpoint_url
         session = get_session(**session_params)
         session.resource('dynamodb', region_name=region, endpoint_url=endpoint_url)
     except botocore.exceptions.NoRegionError:
