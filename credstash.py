@@ -567,7 +567,7 @@ def getSecret(name, version="", region=None, endpoint_url=None, table="credentia
         if dynamodb is None:
             dynamodb = session.resource('dynamodb', region_name=region, endpoint_url=endpoint_url)
         if kms is None:
-            kms = session.client('kms', region_name=kms_region or region, endooint_url=endpoint_url)
+            kms = session.client('kms', region_name=kms_region or region, endpoint_url=endpoint_url)
 
     secrets = dynamodb.Table(table)
 
