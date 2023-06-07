@@ -237,7 +237,6 @@ def getHighestVersion(name, region=None, endpoint_url=None, table="credential-st
     '''
     Return the highest version of `name` in the table
     '''
-    print(endpoint_url)
     session = get_session(**kwargs)
 
     dynamodb = session.resource('dynamodb', region_name=region, endpoint_url=endpoint_url)
@@ -291,7 +290,6 @@ def listSecrets(region=None, table="credential-store", endpoint_url=None, sessio
     do a full-table scan of the credential-store,
     and return the names and versions of every credential
     '''
-    print(endpoint_url)
 
     if session is None:
         session = get_session(**kwargs)
@@ -324,7 +322,6 @@ def putSecret(name, secret, version="", kms_key="alias/credstash",
     put a secret called `name` into the secret-store,
     protected by the key kms_key
     '''
-    print(endpoint_url)
 
     if not context:
         context = {}
@@ -334,7 +331,7 @@ def putSecret(name, secret, version="", kms_key="alias/credstash",
         if dynamodb is None:
             dynamodb = session.resource('dynamodb', region_name=region, endpoint_url=endpoint_url)
         if kms is None:
-            kms = session.client('kms', region_name=kms_region or region)
+            kms = session.client('kms', region_name=kms_region or region, endpoint_url=endpoint_url)
 
     key_service = KeyService(kms, kms_key, context)
     sealed = seal_aes_ctr_legacy(
@@ -362,8 +359,6 @@ def putSecretAutoversion(name, secret, kms_key="alias/credstash",
     :return:
     """
 
-    print(endpoint_url)
-
     latest_version = getHighestVersion(name=name, table=table)
     incremented_version = paddedInt(int(latest_version) + 1)
     try:
@@ -381,7 +376,6 @@ def getAllSecrets(version="", region=None, endpoint_url=None, table="credential-
     '''
     fetch and decrypt all secrets
     '''
-    print(endpoint_url)
     if session is None:
         session = get_session(**kwargs)
     dynamodb = session.resource('dynamodb', region_name=region, endpoint_url=endpoint_url)
