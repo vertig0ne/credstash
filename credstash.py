@@ -290,7 +290,6 @@ def listSecrets(region=None, table="credential-store", endpoint_url=None, sessio
     do a full-table scan of the credential-store,
     and return the names and versions of every credential
     '''
-
     if session is None:
         session = get_session(**kwargs)
     dynamodb = session.resource('dynamodb', region_name=region, endpoint_url=endpoint_url)
@@ -322,7 +321,6 @@ def putSecret(name, secret, version="", kms_key="alias/credstash",
     put a secret called `name` into the secret-store,
     protected by the key kms_key
     '''
-
     if not context:
         context = {}
 
